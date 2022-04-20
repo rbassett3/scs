@@ -4,9 +4,9 @@
 #include "scs_blas.h" /* contains BLAS(X) macros and type info */
 #include "util.h"
 
-#define CONE_TOL (1e-10)
-#define CONE_THRESH (1e-10)
-#define EXP_CONE_MAX_ITERS (1000)
+#define CONE_TOL (1e-9)
+#define CONE_THRESH (1e-8)
+#define EXP_CONE_MAX_ITERS (100)
 #define BOX_CONE_MAX_ITERS (25)
 #define POW_CONE_MAX_ITERS (20)
 
