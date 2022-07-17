@@ -411,7 +411,7 @@ static void update_dual_vars(ScsWork *w) {
   }
 }
 
-/* status < 0 indicates failure */
+/* status != 0 indicates failure */
 static scs_int project_cones(ScsWork *w, const ScsCone *k, scs_int iter) {
   scs_int i, n = w->d->n, l = w->d->n + w->d->m + 1, status;
   for (i = 0; i < l; ++i) {
@@ -1067,7 +1067,7 @@ scs_int scs_solve(ScsWork *w, ScsSolution *sol, ScsInfo *info,
 
     /****************** project onto the cones ******************/
     SCS(tic)(&cone_timer);
-    if (project_cones(w, k, i) < 0) {
+    if (project_cones(w, k, i) != 0) {
       return failure(w, w->d->m, w->d->n, sol, info, SCS_FAILED,
                      "error in project_cones", "failure");
     }

@@ -539,7 +539,7 @@ static scs_int proj_semi_definite_cone(scs_float *X, const scs_int n,
   BLAS(syev)("Vectors", "Lower", &nb, Xs, &nb, e, work, &lwork, &info);
   if (info != 0) {
     scs_printf("WARN: LAPACK syev error, info = %i\n", (int)info);
-    if (info < 0) {
+    if (info != 0) {
       return info;
     }
   }
@@ -822,7 +822,7 @@ static scs_int proj_cone(scs_float *x, const ScsCone *k, ScsConeWork *c,
     /* project onto PSD cones */
     for (i = 0; i < k->ssize; ++i) {
       status = proj_semi_definite_cone(&(x[count]), k->s[i], c);
-      if (status < 0) {
+      if (status != 0) {
         return status;
       }
       count += get_sd_cone_size(k->s[i]);
